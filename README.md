@@ -1,6 +1,7 @@
 ## 目录结构
 
 - \_static 开发用的静态页面
+- config 配置信息
 - libs 一些工具库
 - models 模型（M）
 - public 公共静态文件
@@ -25,3 +26,6 @@
 - ejs
 - consolidate
 - promise-mysql
+- nodemon
+- morgan
+- http-errors
