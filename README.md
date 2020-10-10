@@ -9,6 +9,7 @@
 - views 视图（V）
 - package.json
 - server.js
+- .env 环境变量配置文件(不要上传，避免账号泄露)
 
 ## 主要技术栈
 
@@ -29,3 +30,5 @@
 - nodemon
 - morgan
 - http-errors
+- mz
+- dotenv

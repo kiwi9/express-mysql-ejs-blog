@@ -1,4 +1,4 @@
-const fs = require("fs");
+const fs = require("mz/fs");
 const pathLib = require("path");
 const router = require("express").Router();
 const multer = require("multer");
@@ -6,6 +6,7 @@ const upload = multer({
   dest: pathLib.resolve(__dirname, "../../public/uploads"),
 });
 const error = require("../../libs/error").error;
+const User = require("../../models/User");
 
 router.get("/", (req, res) => {
   const { username, password } = req.query;
@@ -18,24 +19,24 @@ router.post("/", (req, res) => {
   res.end(username + "," + password);
 });
 
-router.post("/upload", upload.any(), (req, res) => {
+router.post("/upload", upload.any(), async (req, res) => {
   const files = req.files;
 
   // 重命名上传的文件
-  files.forEach((file) => {
+  for (let i = 0; i < files.length; i++) {
+    const file = files[i];
     const { originalname, path } = file;
     const extname = pathLib.extname(originalname);
     const newName = path + extname;
 
     try {
-      fs.renameSync(path, newName);
+      await fs.rename(path, newName);
       console.log(newName, "文件上传成功");
-
       res.send(newName + "文件上传成功");
     } catch (e) {
       console.error(e);
     }
-  });
+  }
 });
 
 // set cookie
@@ -63,6 +64,11 @@ router.get("/session", (req, res) => {
   req.session.views = (req.session.views || 0) + 1;
 
   res.end(req.session.views + "views");
+});
+
+router.get("/users", async (req, res) => {
+  const users = await User.getAllUsers();
+  res.send(users);
 });
 
 module.exports = router;
