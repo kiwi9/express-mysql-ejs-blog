@@ -4,6 +4,7 @@ for (let i = 0; i < 100000; i++) {
 }
 
 module.exports = {
+  salt: 'jfdklsjflksjlkfjasjf#*($U(HNM<NM<~!@*()#*@()*',
   secret:
     "fusdifsdjkl@&*()JKLFJKJ:LJLK:J:DFJKLN<MNNV>fds84420&*()%JLNF<D:J:JFD+@!*_u~j</MNNV>",
   keys,
